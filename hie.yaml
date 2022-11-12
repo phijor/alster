@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "test/Main.hs"
+      component: "Alster:test:Alster-test"
+
+    - path: "app/Main.hs"
+      component: "Alster:exe:Alster"
+
+    - path: "src/"
+      component: "lib:Alster"
