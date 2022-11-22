@@ -9,11 +9,15 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+    # agda = {
+    #   url = "github:agda/agda/aliao/range-type";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = args@{ nixpkgs, flake-utils, ... }:
     let
-      ghcVersion = "902";
+      ghcVersion = "94";
       compiler = "ghc${ghcVersion}";
     in
     flake-utils.lib.eachDefaultSystem (system:

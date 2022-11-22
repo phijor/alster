@@ -15,10 +15,16 @@ let
         "
     '';
   };
+  fourmolu = pkgs.writeShellScriptBin "fourmolu"
+    ''
+    exec -a $0 ${pkgs.haskellPackages.fourmolu}/bin/fourmolu -o -XImportQualifiedPost $@
+    '';
+
   buildInputs = [
     cabal
     haskellPackages.haskell-language-server
     haskellPackages.implicit-hie
+    fourmolu
 
     pkgs.pkgconfig
     pkgs.zlib.dev
@@ -32,6 +38,8 @@ let
   mkShell = buildInputs:
     haskellPackages.shellFor {
       inherit packages buildInputs;
+
+      withHoogle = true;
 
       # Ensure nix commands do not use the global <nixpkgs> channel:
       NIX_PATH = "nixpkgs=" + pkgs.path;
